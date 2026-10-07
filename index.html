@@ -1,176 +1,21 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070816">
-<title>NAZU — Network Control</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NAZU Admin</title>
 <style>
-*{box-sizing:border-box}
-:root{--bg:#060711;--panel:rgba(13,15,31,.82);--panel2:#0d1020;--line:rgba(139,92,246,.18);--text:#f5f7ff;--muted:#8d95ad;--purple:#8b5cf6;--blue:#38bdf8;--green:#34d399;--pink:#ec4899}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{overflow-x:hidden}
-body:before{content:"";position:fixed;inset:-20%;z-index:-3;background:
-radial-gradient(circle at 15% 15%,rgba(124,58,237,.23),transparent 26%),
-radial-gradient(circle at 88% 10%,rgba(14,165,233,.16),transparent 25%),
-radial-gradient(circle at 75% 80%,rgba(236,72,153,.10),transparent 28%),
-#060711}
-body:after{content:"";position:fixed;inset:0;z-index:-2;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
-button,input{font:inherit}
-.hidden{display:none!important}
-.wrap{width:min(1240px,94%);margin:auto;padding:22px 0 56px}
-.card{background:linear-gradient(145deg,rgba(18,20,40,.88),rgba(8,10,22,.86));border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.025);backdrop-filter:blur(20px)}
-.login{width:min(440px,92%);margin:12vh auto;padding:34px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:3px;font-size:21px}
-.logoMark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#a855f7,#2563eb);box-shadow:0 0 30px rgba(139,92,246,.35);font-size:17px}
-.badge{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase;color:#c4b5fd;border:1px solid rgba(139,92,246,.3);background:rgba(124,58,237,.09);padding:8px 11px;border-radius:999px}
-.dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 12px #34d399}
-.login h1{font-size:34px;line-height:1.05;margin:22px 0 10px;letter-spacing:-1px}
-.muted{color:var(--muted);font-size:13px;line-height:1.6}
-.input{width:100%;margin:10px 0;padding:14px 15px;border-radius:13px;border:1px solid rgba(148,163,184,.14);background:#080a16;color:#fff;outline:none}
-.input:focus{border-color:rgba(139,92,246,.65);box-shadow:0 0 0 3px rgba(139,92,246,.1)}
-.btn{border:0;border-radius:13px;padding:13px 18px;background:linear-gradient(100deg,#8b5cf6,#3b82f6);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(99,102,241,.2)}
-.btn:hover{filter:brightness(1.08)}
-.msg{min-height:22px;margin-top:12px;color:#fb9aa7;font-size:13px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
-.brandline{display:flex;align-items:center;gap:12px}
-.brandtext small{display:block;color:#6f7891;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:3px}
-.actions{display:flex;align-items:center;gap:10px}
-.lock{background:rgba(255,255,255,.035);border:1px solid rgba(148,163,184,.16);box-shadow:none}
-.hero{padding:25px;display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:16px;overflow:hidden;position:relative}
-.hero:after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-120px;border-radius:50%;background:rgba(139,92,246,.16);filter:blur(8px)}
-.eyebrow{font-size:10px;color:#9ca3ff;letter-spacing:2.4px;font-weight:800;text-transform:uppercase}
-.hero h1{margin:8px 0 7px;font-size:clamp(25px,4vw,40px);letter-spacing:-1.5px}
-.hero p{margin:0;color:var(--muted);font-size:13px}
-.network{position:relative;z-index:1;min-width:170px;text-align:right}
-.network strong{display:block;font-size:22px}
-.network span{color:#6ee7b7;font-size:11px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{padding:18px;position:relative;overflow:hidden}
-.stat:after{content:"";position:absolute;width:90px;height:90px;right:-45px;bottom:-45px;border-radius:50%;background:rgba(139,92,246,.14)}
-.icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(139,92,246,.12);color:#c4b5fd;margin-bottom:15px}
-.label{font-size:9px;color:#7f879f;letter-spacing:1.7px;text-transform:uppercase;font-weight:800}
-.num{font-size:29px;font-weight:900;margin-top:6px;letter-spacing:-.7px}
-.statline{margin-top:7px;font-size:10px;color:#667089}
-.section{margin-top:14px;padding:19px}
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}
-.section h2{font-size:15px;margin:0;letter-spacing:.1px}
-.sectionhead{display:flex;align-items:center;gap:9px}
-.search{max-width:300px;margin:0}
-.tablewrap{overflow:auto;border:1px solid rgba(148,163,184,.08);border-radius:15px}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
-th,td{text-align:left;padding:12px 11px;border-bottom:1px solid rgba(148,163,184,.08);white-space:nowrap}
-tbody tr:last-child td{border-bottom:0}
-tbody tr:hover{background:rgba(139,92,246,.035)}
-th{color:#6f7891;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;background:rgba(255,255,255,.015)}
-td{color:#dce2f2}
-.pill{padding:5px 9px;border-radius:999px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.16);color:#6ee7b7;font-size:10px;font-weight:800}
-.empty{color:#677089;padding:22px;text-align:center}
-.footer{display:flex;justify-content:space-between;color:#596176;font-size:10px;margin-top:16px;padding:0 3px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){
-.wrap{width:94%;padding-top:15px}
-.top{align-items:flex-start}
-.actions .badge{display:none}
-.hero{padding:20px;display:block}
-.network{text-align:left;margin-top:16px}
-.hero h1{font-size:28px}
-.toolbar{align-items:stretch;flex-direction:column}
-.search{max-width:none}
-.section{padding:14px}
-}
-@media(max-width:420px){.grid{grid-template-columns:1fr 1fr;gap:9px}.stat{padding:14px}.num{font-size:24px}.brandtext small{display:none}.lock{padding:11px 13px}}
-</style>
-</head>
-<body>
-<div id="login" class="card login">
-  <div class="logo"><div class="logoMark">N</div><div>NAZU</div></div>
-  <div class="badge" style="margin-top:18px"><span class="dot"></span> Private control</div>
-  <h1>Welcome back.</h1>
-  <p class="muted">Secure access to the NAZU network control center.</p>
-  <form id="form">
-    <input class="input" id="password" type="password" placeholder="Administrator password" autocomplete="current-password" required>
-    <button class="btn" id="loginBtn" type="submit" style="width:100%;margin-top:4px">Open Control Center</button>
-  </form>
-  <div id="msg" class="msg"></div>
-</div>
-
-<div id="app" class="hidden">
-  <div class="wrap">
-    <header class="top">
-      <div class="brandline">
-        <div class="logoMark">N</div>
-        <div class="brandtext"><div class="logo" style="font-size:18px;letter-spacing:2px">NAZU</div><small>Network Control Center</small></div>
-      </div>
-      <div class="actions">
-        <span class="badge"><span class="dot"></span> System online</span>
-        <button id="logout" class="btn lock">Lock</button>
-      </div>
-    </header>
-
-    <section class="card hero">
-      <div>
-        <div class="eyebrow">AI · Web3 · Network</div>
-        <h1>Command your NAZU ecosystem.</h1>
-        <p>Monitor users, activity, nodes and eligibility from one clean control center.</p>
-      </div>
-      <div class="network"><strong>Live</strong><span>● All systems operational</span></div>
-    </section>
-
-    <div class="grid">
-      <div class="card stat"><div class="icon">◎</div><div class="label">Users</div><div id="users" class="num">—</div><div class="statline">Registered accounts</div></div>
-      <div class="card stat"><div class="icon">✦</div><div class="label">Total Points</div><div id="points" class="num">—</div><div class="statline">Network activity</div></div>
-      <div class="card stat"><div class="icon">⌁</div><div class="label">Active Nodes</div><div id="nodes" class="num">—</div><div class="statline">Currently active</div></div>
-      <div class="card stat"><div class="icon">✓</div><div class="label">Eligible</div><div id="eligible" class="num">—</div><div class="statline">Verified status</div></div>
-    </div>
-
-    <section class="card section">
-      <div class="toolbar">
-        <div class="sectionhead"><h2>Network Users</h2><span class="badge">Live data</span></div>
-        <input id="search" class="input search" placeholder="Search user, email or wallet">
-      </div>
-      <div class="tablewrap"><table><thead><tr><th>User</th><th>Points</th><th>Level</th><th>Streak</th><th>Wallet</th><th>Node</th><th>Eligible</th></tr></thead><tbody id="userRows"></tbody></table></div>
-    </section>
-
-    <section class="card section">
-      <div class="sectionhead" style="margin-bottom:15px"><h2>Recent Point Activity</h2><span class="badge">Activity</span></div>
-      <div class="tablewrap"><table><thead><tr><th>Time</th><th>User</th><th>Source</th><th>Points</th></tr></thead><tbody id="ledgerRows"></tbody></table></div>
-    </section>
-
-    <section class="card section">
-      <div class="sectionhead" style="margin-bottom:15px"><h2>Admin Audit Log</h2><span class="badge">Security</span></div>
-      <div class="tablewrap"><table><thead><tr><th>Time</th><th>Admin</th><th>Action</th><th>Target</th></tr></thead><tbody id="auditRows"></tbody></table></div>
-    </section>
-    <div class="footer"><span>NAZU Network Control</span><span>Secure administrator interface</span></div>
-  </div>
-</div>
-
+*{box-sizing:border-box}body{margin:0;background:#050816;color:#eef5ff;font-family:Inter,system-ui,sans-serif}body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 10%,#123b76 0,transparent 34%),radial-gradient(circle at 90% 15%,#35106a 0,transparent 32%),#050816}.wrap{width:min(1180px,94%);margin:auto;padding:30px 0 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}.brand{font-size:23px;font-weight:900;letter-spacing:5px}.badge{font-size:10px;letter-spacing:2px;color:#76cfff;border:1px solid #1b5b91;padding:8px 11px;border-radius:999px}.card{background:rgba(8,16,35,.78);border:1px solid #183052;border-radius:20px;box-shadow:0 20px 70px #0007;backdrop-filter:blur(16px)}.login{max-width:430px;margin:13vh auto;padding:32px}.login h1{margin:0 0 8px;font-size:30px}.muted{color:#91a4c3;font-size:13px}.input{width:100%;margin:10px 0;padding:14px;border-radius:12px;border:1px solid #274467;background:#071226;color:#fff}.btn{border:0;border-radius:12px;padding:13px 18px;background:linear-gradient(100deg,#7045ff,#159cff);color:#fff;font-weight:800;cursor:pointer}.msg{min-height:22px;margin-top:12px;color:#ff9f9f;font-size:13px}.hidden{display:none}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:20px}.label{font-size:10px;color:#8ca1c2;letter-spacing:1.5px;text-transform:uppercase}.num{font-size:30px;font-weight:850;margin-top:8px}.section{margin-top:18px;padding:20px}.section h2{font-size:16px;margin:0 0 15px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #142744;white-space:nowrap}th{color:#8ca1c2;font-size:10px;letter-spacing:1px}.pill{padding:4px 8px;border-radius:999px;background:#102c26;color:#76efb8}.logout{background:#101c31;border:1px solid #28405e}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px}.search{max-width:280px;margin:0}.adminline{color:#90a8ca;font-size:12px}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.grid{grid-template-columns:1fr 1fr}.wrap{width:92%}.top{align-items:flex-start;gap:12px}.brand{font-size:18px}}
+</style></head><body>
+<div id="login" class="card login"><div class="brand">NAZU</div><div class="badge" style="display:inline-block;margin:16px 0">ADMIN CONTROL</div><h1>Admin Access</h1><p class="muted">Enter the private administrator password to continue.</p><form id="form"><input class="input" id="password" type="password" placeholder="Admin password" autocomplete="current-password" required><button class="btn" id="loginBtn" type="submit" style="width:100%">Enter Dashboard</button></form><div id="msg" class="msg"></div></div>
+<div id="app" class="hidden"><div class="wrap"><header class="top"><div><div class="brand">NAZU ADMIN</div><div id="who" class="adminline">Private administrator control</div></div><div><span class="badge">SECURE CONTROL</span> <button id="logout" class="btn logout">Lock</button></div></header>
+<div class="grid"><div class="card stat"><div class="label">Users</div><div id="users" class="num">—</div></div><div class="card stat"><div class="label">Total Points</div><div id="points" class="num">—</div></div><div class="card stat"><div class="label">Active Nodes</div><div id="nodes" class="num">—</div></div><div class="card stat"><div class="label">Eligible</div><div id="eligible" class="num">—</div></div></div>
+<section class="card section"><div class="toolbar"><h2>Users</h2><input id="search" class="input search" placeholder="Search username / email / wallet"></div><div class="tablewrap"><table><thead><tr><th>USER</th><th>POINTS</th><th>LEVEL</th><th>STREAK</th><th>WALLET</th><th>NODE</th><th>ELIGIBLE</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
+<section class="card section"><h2>Recent Point Activity</h2><div class="tablewrap"><table><thead><tr><th>TIME</th><th>USER</th><th>SOURCE</th><th>POINTS</th></tr></thead><tbody id="ledgerRows"></tbody></table></div></section>
+<section class="card section"><h2>Admin Audit Log</h2><div class="tablewrap"><table><thead><tr><th>TIME</th><th>ADMIN</th><th>ACTION</th><th>TARGET</th></tr></thead><tbody id="auditRows"></tbody></table></div></section>
+</div></div>
 <script>
 const FN="https://vjygltfnrmyghlwyjtwu.supabase.co/functions/v1/admin-dashboard";let adminPassword="",data=null;
 const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-async function load(){
-  try{
-    const r=await fetch(FN+"?t="+Date.now(),{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({password:adminPassword})});
-    const text=await r.text();let j={};try{j=JSON.parse(text)}catch{}
-    if(!r.ok){$("msg").textContent=j.error||("Login failed ("+r.status+")");return false}
-    if(!j.stats||!Array.isArray(j.profiles)){$("msg").textContent="Invalid dashboard response";return false}
-    data=j;$("login").classList.add("hidden");$("app").classList.remove("hidden");
-    $("users").textContent=j.stats.totalUsers;$("points").textContent=j.stats.totalPoints.toLocaleString();$("nodes").textContent=j.stats.activeNodes;$("eligible").textContent=j.stats.eligible;
-    renderUsers();
-    $("ledgerRows").innerHTML=j.ledger.map(x=>"<tr><td>"+esc(new Date(x.created_at).toLocaleString())+"</td><td>"+esc(x.user_id.slice(0,8))+"…</td><td>"+esc(x.source)+"</td><td>"+Number(x.points||0).toLocaleString()+"</td></tr>").join("")||"<tr><td colspan='4' class='empty'>No activity yet</td></tr>";
-    $("auditRows").innerHTML=j.audits.map(x=>"<tr><td>"+esc(new Date(x.created_at).toLocaleString())+"</td><td>"+esc(x.admin_wallet||"")+"</td><td>"+esc(x.action)+"</td><td>"+esc(x.target_user_id||"—")+"</td></tr>").join("")||"<tr><td colspan='4' class='empty'>No audit events yet</td></tr>";
-    return true
-  }catch(e){$("msg").textContent="Connection error. Please try again.";return false}
-}
-function renderUsers(){
-  const q=$("search").value.toLowerCase();
-  const rows=data.profiles.filter(p=>{const u=data.users.find(x=>x.id===p.id)||{};return (p.email+" "+p.username+" "+(u.wallet_address||"")).toLowerCase().includes(q)});
-  $("userRows").innerHTML=rows.map(p=>{const u=data.users.find(x=>x.id===p.id)||{};return "<tr><td>"+esc(p.username||p.email||p.id.slice(0,8))+"</td><td>"+Number(p.points||0).toLocaleString()+"</td><td>"+esc(p.level)+"</td><td>"+esc(p.streak)+"</td><td>"+esc(u.wallet_address?u.wallet_address.slice(0,10)+"…"+u.wallet_address.slice(-6):"—")+"</td><td>"+esc(u.node_status||"—")+"</td><td>"+(u.eligible?'<span class="pill">YES</span>':"NO")+"</td></tr>"}).join("")||"<tr><td colspan='7' class='empty'>No matching users</td></tr>"
-}
+async function load(){try{const r=await fetch(FN+"?t="+Date.now(),{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({password:adminPassword})});const text=await r.text();let j={};try{j=JSON.parse(text)}catch{}if(!r.ok){$("msg").textContent=j.error||("Login failed ("+r.status+")");return false}if(!j.stats||!Array.isArray(j.profiles)){$("msg").textContent="Invalid dashboard response";return false}data=j;$("login").classList.add("hidden");$("app").classList.remove("hidden");$("users").textContent=j.stats.totalUsers;$("points").textContent=j.stats.totalPoints.toLocaleString();$("nodes").textContent=j.stats.activeNodes;$("eligible").textContent=j.stats.eligible;renderUsers();$("ledgerRows").innerHTML=j.ledger.map(x=>"<tr><td>"+esc(new Date(x.created_at).toLocaleString())+"</td><td>"+esc(x.user_id.slice(0,8))+"…</td><td>"+esc(x.source)+"</td><td>"+Number(x.points||0).toLocaleString()+"</td></tr>").join("");$("auditRows").innerHTML=j.audits.map(x=>"<tr><td>"+esc(new Date(x.created_at).toLocaleString())+"</td><td>"+esc(x.admin_wallet||"")+"</td><td>"+esc(x.action)+"</td><td>"+esc(x.target_user_id||"—")+"</td></tr>").join("");return true}
+function renderUsers(){const q=$("search").value.toLowerCase();$("userRows").innerHTML=data.profiles.filter(p=>{const u=data.users.find(x=>x.id===p.id)||{};return (p.email+" "+p.username+" "+(u.wallet_address||"")).toLowerCase().includes(q)}).map(p=>{const u=data.users.find(x=>x.id===p.id)||{};return "<tr><td>"+esc(p.username||p.email||p.id.slice(0,8))+"</td><td>"+Number(p.points||0).toLocaleString()+"</td><td>"+esc(p.level)+"</td><td>"+esc(p.streak)+"</td><td>"+esc(u.wallet_address?u.wallet_address.slice(0,10)+"…"+u.wallet_address.slice(-6):"—")+"</td><td>"+esc(u.node_status||"—")+"</td><td>"+(u.eligible?'<span class="pill">YES</span>':"NO")+"</td></tr>"}).join("")}
 $("form").addEventListener("submit",async e=>{e.preventDefault();e.stopPropagation();adminPassword=$("password").value;$("msg").textContent="Checking…";const ok=await load();if(!ok)adminPassword=""});
 $("logout").onclick=()=>{adminPassword="";data=null;$("app").classList.add("hidden");$("login").classList.remove("hidden");$("password").value="";$("msg").textContent=""};
-$("search").oninput=renderUsers;
-window.addEventListener("error",()=>{$("msg").textContent="Dashboard error. Please reload once."});
-</script>
-</body>
-</html>
+$("search").oninput=renderUsers;window.addEventListener("error",()=>{$("msg").textContent="Dashboard error. Please reload once.";});
+</script></body></html>
